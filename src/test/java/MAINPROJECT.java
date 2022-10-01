@@ -113,11 +113,13 @@ public class MAINPROJECT {
     public static void actiontest (){
         Helper.setupdriver();
         WebDriver driver = new ChromeDriver();
-        driver.get(SiteData.STOREHOMEURL);
+        driver.get(SiteData.ASOSURL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(SiteData.TSHIRTSBUTTONXPATH))).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.CHECKBOXSIZESID))).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.CHECKCOLORBKUE))).click();
+        //scroll till the end
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(SiteData.))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
 
     }
 
