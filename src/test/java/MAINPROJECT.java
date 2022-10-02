@@ -114,16 +114,54 @@ public class MAINPROJECT {
         Helper.setupdriver();
         WebDriver driver = new ChromeDriver();
         driver.get(SiteData.ASOSURL);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        WebElement trends = driver.findElement(By.xpath(SiteData.TRENDSXpath));
+        jse.executeScript("argument[0].scrollIntoView();",trends);
+       // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         //scroll till the end
+        // click button
+        // equal between two URL's
+        // scroll till step1
+        // click on pink color
+        // scroll to the 2nd step
+        // click on amount:250 sh
+        // scroll till 3rd step
+        // click on email field
+        // insert email field
+        // click on name field
+        // insert the RECIPIENT'S NAME
+        // scroll till "from"
+        // click on your name field
+        //insert your name
+        // click on drop down menu
+        // choose 240 sh
+        // click on pay now button
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(SiteData.))).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
+       // wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(SiteData.))).click();
+      //  wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
+      //  wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
 
     }
 
+    @Test
+    void scroll(){
+        Helper.setupdriver();
+        WebDriver driver = new ChromeDriver();
+        driver.get(Helper.WIKIHELICOPTER);
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+//        jse.executeScript("alert('This is my message')");
+//        driver.switchTo().alert().accept();
 
+        jse.executeScript("window.scrollBy(0,1000)");
+
+        jse.executeScript("window.scrollBy(0,-500)");
+
+        jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        jse.executeScript("window.scrollBy(0,-(document.body.scrollHeight))");
+
+        WebElement behaviour = driver.findElement(By.id("Flight"));
+        jse.executeScript("arguments[0].scrollIntoView();",behaviour);
+    }
 
 
 }

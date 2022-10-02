@@ -1,7 +1,8 @@
 public class SiteData {
     public static final String ASOSURL ="https://www.asos.com/women/";
+    public static final String TRENDSXpath = "/html/body/div[2]/div/main/section[6]/article/div[2]/h2";
     public static final String GIFTVOUCHER_BUTTENXpath
-            = "//*[@id=\"chrome-footer\"]/footer/div[1]/div[3]/div/section[3]/ul/li[3]/a";
+            = "//*[@id=\"chrome-footer\"]/footer/div[1]/div[3]/div/section[3]/ul/li[4]/a";
     public static final String VAUCHERURL
             = "https://www.asos.com/gift-vouchers/?ctaref=global%20footer|gift%20vouchers";
     public static final String VOUCHER_STEP1Xpath
