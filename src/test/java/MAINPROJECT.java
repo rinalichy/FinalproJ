@@ -1,6 +1,7 @@
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -9,6 +10,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Driver;
 import java.time.Duration;
 
 import static java.lang.Thread.onSpinWait;
@@ -177,7 +179,43 @@ public class MAINPROJECT {
 
     }
 
+    @Test
+    public static void checkboxes() throws IOException, InterruptedException {
+    Helper.setupdriver();
+    WebDriver driver =  new ChromeDriver();
+    driver.get(Helper.CHECKBOXURl);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Helper.OPENOPTIONSXpath))).click();
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Helper.CHECKBOXDOCUMENTS))).click();
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Helper.MAINCHECKBOXpath))).click();
+        File file01 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File file02 = new File(Helper.DPATH +"Checkbox" + Helper.JPG);
+        FileUtils.copyFile(file01,file02);
+        Thread.sleep(3000);
+        driver.close();
 
+    }
+
+    @Test
+    public static void clicks () throws InterruptedException {
+        Helper.setupdriver();
+        WebDriver driver = new ChromeDriver();
+        driver.get(Helper.CLICKBUTTONURL);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        Actions actions = new Actions(driver);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Helper.RIGHTCLICKId)));
+        actions.contextClick().perform();
+        Thread.sleep(3000);
+
+
+
+
+
+
+
+
+
+    }
 
 }
 
