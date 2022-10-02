@@ -17,7 +17,7 @@ public class Helper {
     public static final String SERCHBUTTONID = "searchButton";
 
     public static final String WIKIPHARAGHRAPHXPATH = "/html/body/div[3]/div[3]/div[5]/div[1]/p[6]";
-    public static final String DPATH = "/Users/rina_l/";
+    public static final String DPATH = "/Users/rina_l/Documents/IDEAproject/FinalproJ/pic&txt/";
     public static final String TXT = ".txt";
     public static final String JPG = ".jpg";
 

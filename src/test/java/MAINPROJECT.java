@@ -3,6 +3,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -110,14 +111,47 @@ public class MAINPROJECT {
         driver.close();
     }
     @Test
-    public static void actiontest (){
+    public static void actiontest () throws InterruptedException, IOException {
         Helper.setupdriver();
         WebDriver driver = new ChromeDriver();
         driver.get(SiteData.ASOSURL);
         JavascriptExecutor jse = (JavascriptExecutor)driver;
-        WebElement trends = driver.findElement(By.xpath(SiteData.TRENDSXpath));
-        jse.executeScript("argument[0].scrollIntoView();",trends);
-       // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement voucher = driver.findElement(By.xpath(SiteData.GIFTVOUCHER_BUTTENXpath));
+        jse.executeScript("arguments[0].scrollIntoView();",voucher);
+        voucher.click();
+        Assert.assertEquals(driver.getCurrentUrl(),SiteData.VAUCHERURL);
+        Thread.sleep(3000);
+        WebElement step1 = driver.findElement(By.xpath(SiteData.VOUCHER_STEP1Xpath));
+        jse.executeScript("arguments[0].scrollIntoView();",step1);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.presenceOfElementLocated
+                (By.xpath(SiteData.VOUCHER_STYLEPINKXpath))).click();
+        jse.executeScript("window.scrollBy(0,200)");
+        WebElement amount = driver.findElement(By.xpath(SiteData.VOUCHER_AMOUNT240Xpath));
+        amount.click();
+        jse.executeScript("window.scrollBy(0,200)");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.VOUCHER_EMAILFIELDid)))
+                .sendKeys("abc@g.com");
+        File fileOne = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File fileTwo = new File(Helper.DPATH +"VOUCHERgift1" + Helper.JPG);
+        FileUtils.copyFile(fileOne,fileTwo);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.VOUCHER_TO_NANEid)))
+                .sendKeys("HAPPY BIRTHDAY");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.VOUCHER_FROM_NAMEid)))
+                        .sendKeys("HAPPY BIRTHDAY ROSSITA");
+        jse.executeScript("window.scrollBy(0,200)");
+        WebElement dropMenu = driver.findElement(By.id(SiteData.VOUCHER_DELIVERY_DROPDMENUid));
+        dropMenu.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.VOUCHER_DELIVERY_DROPOPTIONid)))
+                .click();
+
+        File fileh = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File fileh1 = new File(Helper.DPATH +"VOUCHERgift" + Helper.JPG);
+        FileUtils.copyFile(fileh,fileh1);
+
+        driver.close();
+
+       //
         //scroll till the end
         // click button
         // equal between two URL's
@@ -137,31 +171,12 @@ public class MAINPROJECT {
         // choose 240 sh
         // click on pay now button
 
-       // wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(SiteData.))).click();
+       //
       //  wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
       //  wait.until(ExpectedConditions.presenceOfElementLocated(By.id(SiteData.))).click();
 
     }
 
-    @Test
-    void scroll(){
-        Helper.setupdriver();
-        WebDriver driver = new ChromeDriver();
-        driver.get(Helper.WIKIHELICOPTER);
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
-//        jse.executeScript("alert('This is my message')");
-//        driver.switchTo().alert().accept();
-
-        jse.executeScript("window.scrollBy(0,1000)");
-
-        jse.executeScript("window.scrollBy(0,-500)");
-
-        jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-        jse.executeScript("window.scrollBy(0,-(document.body.scrollHeight))");
-
-        WebElement behaviour = driver.findElement(By.id("Flight"));
-        jse.executeScript("arguments[0].scrollIntoView();",behaviour);
-    }
 
 
 }
