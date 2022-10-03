@@ -183,39 +183,60 @@ public class MAINPROJECT {
     public static void checkboxes() throws IOException, InterruptedException {
     Helper.setupdriver();
     WebDriver driver =  new ChromeDriver();
-    driver.get(Helper.CHECKBOXURl);
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Helper.OPENOPTIONSXpath))).click();
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Helper.CHECKBOXDOCUMENTS))).click();
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Helper.MAINCHECKBOXpath))).click();
-        File file01 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        File file02 = new File(Helper.DPATH +"Checkbox" + Helper.JPG);
-        FileUtils.copyFile(file01,file02);
-        Thread.sleep(3000);
-        driver.close();
+    driver.get("https://the-internet.herokuapp.com/checkboxes");
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Checkboxes"))).click();
+        if (driver.getCurrentUrl().equals("https://the-internet.herokuapp.com/checkboxes")){
+            System.out.println("----------right URL-----------");
+            WebElement checkbox1 =
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"checkboxes\"]/input[1]")));
+            WebElement checkbox2 =
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"checkboxes\"]/input[2]")));
+            Thread.sleep(3000);
+            checkbox1.click();
+            Thread.sleep(3000);
 
+            System.out.println("checkbox1 is selected = " + checkbox1.isSelected());
+            System.out.println("checkbox2 is selected = " + checkbox2.isSelected());
+        }else{
+            System.out.println("wrong URL");
+        }
     }
 
+      //  File file01 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+      //  File file02 = new File(Helper.DPATH +"Checkbox" + Helper.JPG);
+     //   FileUtils.copyFile(file01,file02);
+      //  Thread.sleep(3000);
+      //  driver.close();
+
+
+
     @Test
-    public static void clicks () throws InterruptedException {
+    public static void clicks () throws InterruptedException, IOException {
         Helper.setupdriver();
         WebDriver driver = new ChromeDriver();
         driver.get(Helper.CLICKBUTTONURL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         Actions actions = new Actions(driver);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Helper.RIGHTCLICKId)));
-        actions.contextClick().perform();
+        WebElement optonsRightclick =
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Helper.RIGHTCLICKId)));
+        actions.contextClick(optonsRightclick).perform();
         Thread.sleep(3000);
-
-
-
-
-
-
-
-
-
+        File file01 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File file02 = new File(Helper.DPATH +"OPTINCLICK" + Helper.JPG);
+        FileUtils.copyFile(file01,file02);
+        Thread.sleep(3000);
+        WebElement doulbelclick =
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Helper.DOUBLEId)));
+        actions.doubleClick(doulbelclick).perform();
+        File file1 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File file2 = new File(Helper.DPATH +"doubleclick" + Helper.JPG);
+        sleep(3000);
+        driver.close();
     }
+
+
+
 
 }
 
