@@ -10,17 +10,18 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Driver;
 import java.time.Duration;
 
-import static java.lang.Thread.onSpinWait;
 import static java.lang.Thread.sleep;
 
-public class MAINPROJECT {
+public class MainProject {
     @Test
     void setUPtest(){
         Helper.setupdriver();
+        WebDriver driver = new ChromeDriver();
+        driver.close();
     }
+
 
     @Test
     public static void navigateTEST() throws InterruptedException {
@@ -113,7 +114,7 @@ public class MAINPROJECT {
         driver.close();
     }
     @Test
-    public static void actiontest () throws InterruptedException, IOException {
+    public static void actionstest () throws InterruptedException, IOException {
         Helper.setupdriver();
         WebDriver driver = new ChromeDriver();
         driver.get(SiteData.ASOSURL);
@@ -183,24 +184,11 @@ public class MAINPROJECT {
     public static void checkboxes() throws IOException, InterruptedException {
     Helper.setupdriver();
     WebDriver driver =  new ChromeDriver();
-    driver.get("https://the-internet.herokuapp.com/checkboxes");
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Checkboxes"))).click();
-        if (driver.getCurrentUrl().equals("https://the-internet.herokuapp.com/checkboxes")){
-            System.out.println("----------right URL-----------");
-            WebElement checkbox1 =
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"checkboxes\"]/input[1]")));
-            WebElement checkbox2 =
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"checkboxes\"]/input[2]")));
-            Thread.sleep(3000);
-            checkbox1.click();
-            Thread.sleep(3000);
-
-            System.out.println("checkbox1 is selected = " + checkbox1.isSelected());
-            System.out.println("checkbox2 is selected = " + checkbox2.isSelected());
-        }else{
-            System.out.println("wrong URL");
-        }
+    driver.get(Helper.CHECKBOXURl);
+    WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+    WebElement check1 =
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Helper.OPENOPTIONSXpath)));
+    check1.click();
     }
 
       //  File file01 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
@@ -235,7 +223,26 @@ public class MAINPROJECT {
         driver.close();
     }
 
+    @Test
+    public static void alert () throws InterruptedException {
+        Helper.setupdriver();
+        WebDriver driver = new ChromeDriver();
+        driver.get(Helper.ALERTURL);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement alertbutton =
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Helper.ALERTBUTTONid)));
+        alertbutton.click();
+        Thread.sleep(2000);
+        driver.switchTo().alert().accept();
+        WebElement secondalert =
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Helper.ALERTBUTTONaccept_dissnisID)));
+        secondalert.click();
+        driver.switchTo().alert().dismiss();
+        sleep(2000);
+        driver.close();
 
+
+    }
 
 
 }

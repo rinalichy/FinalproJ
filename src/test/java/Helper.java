@@ -22,12 +22,15 @@ public class Helper {
     public static final String JPG = ".jpg";
 
     public static final String CHECKBOXURl = "https://demoqa.com/checkbox";
-    public static final String OPENOPTIONSXpath = "//*[@id=\"tree-node\"]/ol/li/span/button/svg";
+    public static final String OPENOPTIONSXpath = "//*[@id=\"tree-node\"]/ol/li/span/button";
     public static final String MAINCHECKBOXpath = "//*[@id=\"tree-node\"]/ol/li/span/label/span[1]";
     public static final String CHECKBOXDOCUMENTS = "//*[@id=\"tree-node\"]/ol/li/ol/li[2]/span/label/span[1]/svg";
     public static final String CLICKBUTTONURL= "https://demoqa.com/buttons";
     public static final String DOUBLEId = "doubleClickBtn";
     public static final String RIGHTCLICKId = "doubleClickBtn";
+    public static final String ALERTURL= "https://demoqa.com/alerts";
+    public static final String ALERTBUTTONid = "alertButton";
+    public static final String ALERTBUTTONaccept_dissnisID = "confirmButton";
 
 
 
